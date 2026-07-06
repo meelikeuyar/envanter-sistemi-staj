@@ -1,0 +1,38 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: inventory-mongo
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: inventory-app
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: inventory-server
+    restart: unless-stopped
+    ports:
+      - '5000:5000'
+    env_file:
+      - ./server/.env
+    depends_on:
+      - mongodb
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: inventory-client
+    restart: unless-stopped
+    ports:
+      - '80:80'
+    depends_on:
+      - server
+
+volumes:
+  mongo-data:

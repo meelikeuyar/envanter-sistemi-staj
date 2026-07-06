@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme('colors.brand.50');
+  }
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.brand.500');
+    border-radius: 10px;
+  }
+}
+
+@layer components {
+  .input-base {
+    @apply w-full rounded-lg border border-brand-100 bg-white px-4 py-2.5
+    text-sm text-brand-900 placeholder-brand-300
+    outline-none transition-all
+    focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5
+    text-sm font-semibold tracking-wide transition-all
+    disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-gradient-to-br from-brand-500 to-brand-700 text-white
+    hover:opacity-90 active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn border border-brand-100 bg-brand-50 text-brand-700
+    hover:bg-brand-100;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-50 text-red-600 border border-red-200
+    hover:bg-red-100;
+  }
+
+  .card {
+    @apply rounded-2xl border border-brand-100 bg-white p-6
+    shadow-sm transition-all
+    hover:-translate-y-1 hover:shadow-lg hover:shadow-brand-500/10
+    hover:border-brand-300;
+  }
+}
